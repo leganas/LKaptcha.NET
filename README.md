@@ -1,26 +1,26 @@
-# Kaptcha.NET
-[![Build Status](https://dev.azure.com/twsl/Kaptcha.NET/_apis/build/status/twsI.Kaptcha.NET?branchName=master)](https://dev.azure.com/twsl/Kaptcha.NET/_build/latest?definitionId=6&branchName=master) ![Nuget](https://img.shields.io/nuget/v/Kaptcha.NET.svg) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Kaptcha.NET.svg)
-LKaptcha.NET is simple captcha library for .NET Core projects.
+# LKaptcha.NET fork Kaptcha.NET
+[![Original](https://github.com/twsl/Kaptcha.NET)]
+LKaptcha.NET is simple captcha library for .NET 5 projects.
 
 
-## Motivation
-With Google's [reCAPTCHA](https://en.wikipedia.org/wiki/ReCAPTCHA) beeing the de facto standard solution for captchas nowadays, it is pretty much the opposite of a privacy respecting solution. It collects substantial information which can be used to track users and makes complying with GDPR much more complicated.
-Therefore I wanted to create a minimalistic, privacy respecting solution, which is simple to implement, yet sufficiently difficult to solve.
+## Мотивация
+Google's [reCAPTCHA](https://en.wikipedia.org/wiki/ReCAPTCHA) Будучи фактически стандартным решением для капчи в наши дни, оно практически не уважает конфиденциальность. Оно собирает значительный объем информации, которая может быть использована для отслеживания пользователей, что значительно усложняет соблюдение GDPR.
+Поэтому я хотел создать минималистичное решение, уважающее конфиденциальность, простое в реализации, но достаточно сложное в решении.
 
 
-## Examples
+## Примеры
 | | | | |
 |-|-|-|-|
 |![alt-text-1](./img/1.png "Example 1") | ![alt-text-2](./img/2.png "Example 2") | ![alt-text-3](./img/3.png "Example 3") | ![alt-text-4](./img/4.png "Example 4") |
 |![alt-text-5](./img/5.png "Example 5") | ![alt-text-6](./img/6.png "Example 6") | ![alt-text-7](./img/7.png "Example 7") | ![alt-text-8](./img/8.png "Example 8") |
 
 
-## Install
-Install the nuget package `Kaptcha.NET`.
+## Установка
+Install the nuget package `LKaptcha.NET`.
 
 
-## Getting Started
-* Add the required captcha services via the service collection extension. You have to use a Cache Provider. You can use SQL Server Cache, In Memory Cache or Distributed Cache (like a Redis).
+## Для начала
+* Добавьте необходимые сервисы капчи через расширение коллекции сервисов. Вам потребуется использовать поставщик кэша. Вы можете использовать кэш SQL Server, кэш в оперативной памяти или распределенный кэш (например, Redis).
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
@@ -31,7 +31,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-* In case you prefer to create and use your own, custom implementation of any service, replace '.AddCatpcha(Configuration)' with the following and use your own classes:
+* Если вы предпочитаете создавать и использовать собственную, пользовательскую реализацию любого сервиса, замените '.AddCatpcha(Configuration)' следующим кодом и используйте свои собственные классы:
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
@@ -53,12 +53,12 @@ public void ConfigureServices(IServiceCollection services)
 @addTagHelper *, LKaptcha.NET
 ```
 
-* Actually adding the captcha into the ViewPage afterwards is as simple as 
+* На самом деле, добавить капчу на страницу просмотра после этого очень просто:
 ```html
 <captcha />
 ```
 
-* If you want to provide a direkt link to a captcha, add a new controller and inherit from `Controllers\CaptchaController.cs`, which provides all requied methods.
+* Если вы хотите предоставить прямую ссылку на капчу, добавьте новый контроллер и наследуйте его от `Controllers\CaptchaController.cs`, который предоставляет все необходимые методы.
 ```razor
 @{
 	var captcha = await generator.CreateCaptchaAsync();
@@ -66,14 +66,14 @@ public void ConfigureServices(IServiceCollection services)
 <captcha captcha-link="/captcha/@captcha.Id" captcha-id="@captcha.Id" />
 ```
 
-* Or you can use controller and actions instead of a direct link and let the TagHelper generate the captcha on it'S own.
+* Или же вы можете использовать контроллер и действия вместо прямой ссылки и позволить TagHelper генерировать капчу самостоятельно.
 ```html
 <captcha asp-controller="Home" asp-action="GetCaptcha" />
 ```
 
 
-## Configuration
-You can configure the following options:
+## Конфигурация
+Вы можете настроить следующие параметры:
 
 * Image height (default: `250`)
 * Image Width (default: `100`)
@@ -89,8 +89,8 @@ You can configure the following options:
 * Font size (default: `22 - 30`)
 * Font style (default: `regular`)
 
-To change the default values you need to set the appropriate properties in eigher the `CaptchaOptions` or `FontOptions`. 
-Moreover you can enable different effects within the `EffectOptions`.
+Чтобы изменить значения по умолчанию, необходимо установить соответствующие параметры в одном из разделов `CaptchaOptions` или `FontOptions`.
+Кроме того, вы можете включить различные эффекты в разделе `EffectOptions`.
 
 * `BlobEffect`
 * `BoxEffect`
@@ -98,10 +98,3 @@ Moreover you can enable different effects within the `EffectOptions`.
 * `NoiseEffect`
 * `RippleEffect`
 * `WaveEffect`
-
-## TODO
-Currently, `System.Drawing.Common` is used. I plan on replacing it in the future. To use it on Linux, add the following commands to your docker file
-```
-sudo apt install libc6-dev 
-sudo apt install libgdiplus
-```
