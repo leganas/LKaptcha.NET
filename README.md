@@ -1,6 +1,6 @@
 # Kaptcha.NET
 [![Build Status](https://dev.azure.com/twsl/Kaptcha.NET/_apis/build/status/twsI.Kaptcha.NET?branchName=master)](https://dev.azure.com/twsl/Kaptcha.NET/_build/latest?definitionId=6&branchName=master) ![Nuget](https://img.shields.io/nuget/v/Kaptcha.NET.svg) ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Kaptcha.NET.svg)
-Kaptcha.NET is simple captcha library for .NET Core projects.
+LKaptcha.NET is simple captcha library for .NET Core projects.
 
 
 ## Motivation
@@ -50,7 +50,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * Add the TagHelper to the `_ViewImports.cshtml`
 ```csharp
-@addTagHelper *, Kaptcha.NET
+@addTagHelper *, LKaptcha.NET
 ```
 
 * Actually adding the captcha into the ViewPage afterwards is as simple as 
@@ -99,12 +99,9 @@ Moreover you can enable different effects within the `EffectOptions`.
 * `RippleEffect`
 * `WaveEffect`
 
-In ASP.NET Core projects, you can do this via the `appsettings.json` file, an example is provided under `test\Kaptcha.NET.Web`.
-
 ## TODO
 Currently, `System.Drawing.Common` is used. I plan on replacing it in the future. To use it on Linux, add the following commands to your docker file
 ```
 sudo apt install libc6-dev 
 sudo apt install libgdiplus
 ```
-and consider checking out this [blog post](https://www.hanselman.com/blog/HowDoYouUseSystemDrawingInNETCore.aspx) by Scott Hanselman.
